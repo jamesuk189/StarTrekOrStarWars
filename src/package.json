@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "copy-html-to-dist": "copyfiles **.html ../dist",
-    "copy-js-to-dist": "copyfiles js/**.js ../dist/js",
+    "copy-html-to-dist": "copyfiles **.html dist",
+    "copy-js-to-dist": "copyfiles js/**.js dist/js",
     "copy-to-dist": "npm run copy-html-to-dist && npm run copy-js-to-dist",
-    "compile-css-to-dist": "postcss css/styles.css -o ../dist/css/styles.css",
+    "compile-css-to-dist": "postcss css/styles.css -o dist/css/styles.css",
     "build": "npm run copy-to-dist && npm run compile-css-to-dist"
   },
   "repository": {
