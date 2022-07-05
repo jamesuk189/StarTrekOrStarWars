@@ -1,0 +1,25 @@
+{
+  "name": "startrekorstarwars",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "postcss styles.css -o src/styles.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamesuk189/StarTrekOrStarWars.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jamesuk189/StarTrekOrStarWars/issues"
+  },
+  "homepage": "https://github.com/jamesuk189/StarTrekOrStarWars#readme",
+  "dependencies": {
+    "autoprefixer": "^10.4.7",
+    "postcss-cli": "^10.0.0",
+    "tailwindcss": "^3.1.4"
+  }
+}

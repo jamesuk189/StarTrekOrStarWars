@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Star Trek or Star Wars</title>
+  <meta name="description" content="Decides if a sentence if from Star Trek or Star Wars by using an ML.NET model." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="mx-auto max-w-3xl p-3">
+    <h1 class="mb-6 pb-6 border-b text-6xl">Star Trek or Star Wars</h1>
+    <p class="mb-6">Have you ever not been entirely sure which sci-fi franchise was responsible for creating that
+      classic line? Now you can use the power of machine learning to find out!</p>
+    <p class="mb-6">Enter your line or sentence below and find out if it is likely to be from Star Trek or Star Wars.
+    </p>
+    <div class="mb-6">
+      <div class="mb-4">
+        <label class="block mb-2 font-bold" for="username">Line or Sentence</label>
+        <input class="w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700" id="txt-sentence"
+          type="text" />
+      </div>
+      <button class="block mx-auto w-1/2 rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+        type="button">Star Trek or Star Wars?</button>
+    </div>
+
+    <div class="mb-6">
+      <div class="w-full rounded-lg border bg-white p-4 text-center">
+        <p class="mb-5 text-base text-gray-500 sm:text-lg">This line belongs to...</p>
+        <h5 class="mb-2 text-4xl font-bold">Star Trek</h5>
+      </div>
+    </div>
+
+    <div>
+      <div class="w-full p-4 text-center">
+        <h2 class="mb-2 text-3xl font-bold dark:text-white">Lines you can try</h5>
+          <p class="mb-5 text-base text-gray-500 sm:text-lg">If you are struggling to choose a line, try one of the
+            lines below...</p>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <button class="rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button">There is no
+              try.</button>
+            <button class="rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button">Live long and
+              prosper.</button>
+            <button class="rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button">Who&apos;s the
+              more foolish: the fool or the fool who follows him?</button>
+            <button class="rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button">I am a doctor,
+              not a bricklayer.</button>
+            <button class="rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button">Difficult to
+              see; always in motion is the future.</button>
+            <button class="rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button">Make it
+              so.</button>
+            <button class="rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button">Laugh it up,
+              fuzzball!</button>
+            <button class="rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button">Fear is the
+              true enemy. The only enemy.</button>
+          </div>
+      </div>
+    </div>
+
+    <div class="mt-6">
+      <p>This site uses a Microsoft Azure Function to call an ML.NET binary classification model which was trained on
+        scripts from the original trilogy Star Wars films and Star Trek TV episodes.</p>
+    </div>
+  </div>
+</body>
+
+</html>
