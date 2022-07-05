@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "copy-html-to-dist": "copyfiles **.html dist",
-    "copy-js-to-dist": "copyfiles js/**.js dist/js",
+    "copy-html-to-dist": "copyfiles *.html dist",
+    "copy-js-to-dist": "copyfiles js/*.js dist/js",
     "copy-to-dist": "npm run copy-html-to-dist && npm run copy-js-to-dist",
     "compile-css-to-dist": "postcss css/styles.css -o dist/css/styles.css",
     "build": "npm run copy-to-dist && npm run compile-css-to-dist"
@@ -27,6 +27,8 @@
     "tailwindcss": "^3.1.4"
   },
   "devDependencies": {
-    "copyfiles": "^2.4.1"
+    "concurrently": "^7.2.2",
+    "copyfiles": "^2.4.1",
+    "nodemon": "^2.0.19"
   }
 }
