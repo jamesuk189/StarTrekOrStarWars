@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "copy-js-to-src": "copyfiles -f node_modules/axios/dist/* js/axios",
     "copy-html-to-dist": "copyfiles *.html dist",
-    "copy-js-to-dist": "copyfiles js/*.js dist/js",
+    "copy-js-to-dist": "copyfiles -u 1 js/**/*.js dist/js",
     "copy-to-dist": "npm run copy-html-to-dist && npm run copy-js-to-dist",
     "compile-css-to-dist": "postcss css/styles.css -o dist/css/styles.css",
-    "build": "npm run copy-to-dist && npm run compile-css-to-dist"
+    "build": "npm run copy-js-to-src && npm run copy-to-dist && npm run compile-css-to-dist"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
   "homepage": "https://github.com/jamesuk189/StarTrekOrStarWars#readme",
   "dependencies": {
     "autoprefixer": "^10.4.7",
+    "axios": "^0.27.2",
     "postcss-cli": "^10.0.0",
     "tailwindcss": "^3.1.4"
   },

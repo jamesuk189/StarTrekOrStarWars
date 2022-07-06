@@ -6,7 +6,8 @@
   <title>Star Trek or Star Wars</title>
   <meta name="description" content="Decides if a sentence if from Star Trek or Star Wars by using an ML.NET model." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="css/styles.css" />
+  <link type="text/css" rel="stylesheet" href="/css/styles.css" />
+  <script type="text/javascript" src="/js/axios/axios.min.js" async></script>
 </head>
 
 <body>
@@ -19,41 +20,50 @@
     <div class="mb-6">
       <div class="mb-4">
         <label class="block mb-2 font-bold" for="username">Line or Sentence</label>
-        <input class="w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700" id="txt-sentence"
-          type="text" />
+        <input id="txt-input" class="w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700"
+          type="text" autocomplete="off" autofocus />
       </div>
-      <button class="block mx-auto w-1/2 rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
+      <button id="btn-process"
+        class="block mx-auto w-1/2 rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
         type="button">Star Trek or Star Wars?</button>
     </div>
 
-    <div class="mb-6 hidden">
-      <div class="w-full rounded-lg border bg-white p-4 text-center">
-        <p class="mb-5 text-base text-gray-500 sm:text-lg">This line belongs to...</p>
-        <h5 class="mb-2 text-4xl font-bold">Star Trek</h5>
+    <div id="pnl-status" class="mb-6 hidden">
+      <div class="w-full rounded-lg border bg-slate-700 p-4 text-center">
+        <p id="status-intro" class="mb-5 text-base text-slate-300 sm:text-lg">This line belongs to...</p>
+        <h5 id="status-title" class="mb-2 text-4xl text-white font-bold">Star Trek</h5>
       </div>
     </div>
 
     <div>
       <div class="w-full p-4 text-center">
-        <h2 class="mb-2 text-3xl font-bold dark:text-white">Lines you can try</h5>
+        <h2 class="mb-2 text-3xl font-bold">Lines you can try</h5>
           <p class="mb-5 text-base text-gray-500 sm:text-lg">If you are struggling to choose a line, try one of the
             lines below...</p>
           <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <button class="rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button">There is no
+            <button class="btn-suggestion rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button"
+              data-text="There is no try.">There is no
               try.</button>
-            <button class="rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button">Live long and
+            <button class="btn-suggestion rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button"
+              data-text="Live long and prospoer.">Live long and
               prosper.</button>
-            <button class="rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button">Who&apos;s the
+            <button class="btn-suggestion rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button"
+              data-text="Who's the more foolish: the fool or the fool who follows him?">Who&apos;s the
               more foolish: the fool or the fool who follows him?</button>
-            <button class="rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button">I am a doctor,
+            <button class="btn-suggestion rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button"
+              data-text="I am a doctor, not a bricklayer.">I am a doctor,
               not a bricklayer.</button>
-            <button class="rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button">Difficult to
+            <button class="btn-suggestion rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button"
+              data-text="Difficult to see; always in motion is the future.">Difficult to
               see; always in motion is the future.</button>
-            <button class="rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button">Make it
+            <button class="btn-suggestion rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button"
+              data-text="Make it so.">Make it
               so.</button>
-            <button class="rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button">I find your
+            <button class="btn-suggestion rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button"
+              data-text="I find your lack of faith disturbing.">I find your
               lack of faith disturbing.</button>
-            <button class="rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button">Fear is the
+            <button class="btn-suggestion rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button"
+              data-text="Fear is the true enemy. The only enemy.">Fear is the
               true enemy. The only enemy.</button>
           </div>
       </div>
@@ -64,6 +74,71 @@
         scripts from the original trilogy Star Wars films and Star Trek TV episodes.</p>
     </div>
   </div>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      const txtInput = document.getElementById('txt-input');
+      const btnProcess = document.getElementById('btn-process');
+      const statusPanel = document.getElementById('pnl-status');
+      const statusIntro = document.getElementById('status-intro');
+      const statusTitle = document.getElementById('status-title');
+      const btnSuggestions = document.querySelectorAll('.btn-suggestion');
+
+      function showStatusPanel() {
+        statusPanel.classList.remove('hidden');
+      }
+
+      function hideStatusPanel() {
+        statusPanel.classList.add('hidden');
+      }
+
+      function showWorking() {
+        hideStatusPanel();
+        btnProcess.disabled = true;
+        btnProcess.textContent = 'Working...';
+      }
+
+      function hideWorking() {
+        showStatusPanel();
+        btnProcess.disabled = false;
+        btnProcess.textContent = 'Star Trek or Star Wars?';
+      }
+
+      function retrievePrediction() {
+        showWorking();
+
+        axios.post('/api/predicttext', {
+          text: txtInput.value
+        })
+          .then(function (response) {
+            const label = response.data.label;
+            statusIntro.textContent = 'This line belongs to...'
+            statusTitle.textContent = label;
+
+            hideWorking();
+          })
+          .catch(function (error) {
+            statusIntro.textContent = 'Sorry, an error was encountered. Try again or check later.';
+            statusTitle.textContent = '';
+            console.error(error.toJSON());
+
+            hideWorking();
+          });
+      }
+
+      function setTextAndProcess() {
+        const text = this.dataset.text;
+        txtInput.value = text;
+        retrievePrediction();
+      }
+
+      btnProcess.addEventListener('click', retrievePrediction);
+      txtInput.addEventListener('keypress', function (event) { if (event.keyCode !== 13) { return; } event.preventDefault(); retrievePrediction(); });
+      btnSuggestions.forEach(btn => {
+        btn.addEventListener('click', setTextAndProcess);
+      });
+    });
+  </script>
 </body>
 
 </html>
