@@ -14,7 +14,7 @@ The model was trained for 10 minutes with the following command.
 
 ## Running Locally
 
-Run the following command from `src`.  
+Run the following command from `src`. 
 
 `npm run build`  
 
