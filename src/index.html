@@ -10,70 +10,62 @@
   <script type="text/javascript" src="/js/axios/axios.min.js" async></script>
 </head>
 
-<body>
+<body class="bg-slate-800 text-slate-100">
   <div class="mx-auto max-w-3xl p-3">
-    <h1 class="mb-6 pb-6 border-b text-6xl text-center">Star Trek or Star Wars</h1>
+    <h1 class="mb-6 border-b pb-6 text-center text-6xl">Star Trek or Star Wars?</h1>
     <p class="mb-6">Have you ever not been entirely sure which sci-fi franchise was responsible for creating that
       classic line? Now you can use the power of machine learning to find out!</p>
-    <p class="mb-6">Enter your line or sentence below and find out if it is likely to be from Star Trek or Star Wars.
-    </p>
-    <div class="mb-6">
-      <div class="mb-4">
-        <label class="block mb-2 font-bold" for="username">Line or Sentence</label>
-        <input id="txt-input" class="w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700"
-          type="text" autocomplete="off" autofocus />
+    <p class="mb-6 mt-24">Enter your line or sentence below and find out if it is likely to be from Star Trek or Star
+      Wars.</p>
+    <div class="mb-6 rounded bg-slate-600">
+      <div class="p-4">
+        <div class="mb-4">
+          <label class="mb-2 block font-semibold" for="txt-input">Line or Sentence</label>
+          <input id="txt-input" class="w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700"
+            type="text" autocomplete="off" autofocus />
+        </div>
+        <button id="btn-process"
+          class="mx-auto block w-1/2 rounded border border-indigo-700 bg-indigo-500 px-4 py-2 font-semibold text-white hover:bg-indigo-600"
+          type="button">Star Trek or Star Wars?</button>
       </div>
-      <button id="btn-process"
-        class="block mx-auto w-1/2 rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700"
-        type="button">Star Trek or Star Wars?</button>
+      <div id="pnl-status" class="transition hidden">
+        <div class="w-full rounded-ee rounded-es border-t bg-slate-700 p-4 text-center">
+          <p id="status-intro" class="text-slate-00 mb-5 text-base sm:text-lg">This line belongs to...</p>
+          <h5 id="status-title" class="mb-2 text-5xl font-bold text-white">Star Trek</h5>
+        </div>
+      </div>
     </div>
 
-    <div id="pnl-status" class="mb-6 hidden">
-      <div class="w-full rounded-lg border bg-slate-700 p-4 text-center">
-        <p id="status-intro" class="mb-5 text-base text-slate-300 sm:text-lg">This line belongs to...</p>
-        <h5 id="status-title" class="mb-2 text-4xl text-white font-bold">Star Trek</h5>
-      </div>
-    </div>
-
-    <div>
-      <div class="w-full p-4 text-center">
-        <h2 class="mb-2 text-3xl font-bold">Lines you can try</h5>
-          <p class="mb-5 text-base text-gray-500 sm:text-lg">If you are struggling to choose a line, try one of the
-            lines below...</p>
-          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <button class="btn-suggestion rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button"
-              data-text="There is no try.">There is no
-              try.</button>
-            <button class="btn-suggestion rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button"
-              data-text="Live long and prosper.">Live long and
-              prosper.</button>
-            <button class="btn-suggestion rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button"
-              data-text="Who's the more foolish: the fool or the fool who follows him?">Who&apos;s the
-              more foolish: the fool or the fool who follows him?</button>
-            <button class="btn-suggestion rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button"
-              data-text="I am a doctor, not a bricklayer.">I am a doctor,
-              not a bricklayer.</button>
-            <button class="btn-suggestion rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button"
-              data-text="Difficult to see; always in motion is the future.">Difficult to
-              see; always in motion is the future.</button>
-            <button class="btn-suggestion rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button"
-              data-text="Make it so.">Make it
-              so.</button>
-            <button class="btn-suggestion rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button"
-              data-text="I find your lack of faith disturbing.">I find your
-              lack of faith disturbing.</button>
-            <button class="btn-suggestion rounded bg-blue-500 p-4 font-bold text-white hover:bg-blue-700" type="button"
-              data-text="Fear is the true enemy. The only enemy.">Fear is the
-              true enemy. The only enemy.</button>
-          </div>
+    <div class="mt-24 p-4 text-center">
+      <h2 class="mb-2 text-3xl font-bold">Lines you can try</h2>
+      <p class="mb-5 text-base sm:text-lg">If you are struggling to choose a line, try one of the lines below...</p>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <button class="btn-suggestion rounded border border-indigo-500 p-4 font-semibold text-white hover:bg-indigo-600"
+          type="button" data-text="There is no try.">There is no try.</button>
+        <button class="btn-suggestion rounded border border-indigo-500 p-4 font-semibold text-white hover:bg-indigo-600"
+          type="button" data-text="Live long and prosper.">Live long and prosper.</button>
+        <button class="btn-suggestion rounded border border-indigo-500 p-4 font-semibold text-white hover:bg-indigo-600"
+          type="button" data-text="Who's the more foolish: the fool or the fool who follows him?">Who&apos;s the more
+          foolish: the fool or the fool who follows him?</button>
+        <button class="btn-suggestion rounded border border-indigo-500 p-4 font-semibold text-white hover:bg-indigo-600"
+          type="button" data-text="I am a doctor, not a bricklayer.">I am a doctor, not a bricklayer.</button>
+        <button class="btn-suggestion rounded border border-indigo-500 p-4 font-semibold text-white hover:bg-indigo-600"
+          type="button" data-text="Difficult to see; always in motion is the future.">Difficult to see; always in motion
+          is the future.</button>
+        <button class="btn-suggestion rounded border border-indigo-500 p-4 font-semibold text-white hover:bg-indigo-600"
+          type="button" data-text="Make it so.">Make it so.</button>
+        <button class="btn-suggestion rounded border border-indigo-500 p-4 font-semibold text-white hover:bg-indigo-600"
+          type="button" data-text="I find your lack of faith disturbing.">I find your lack of faith disturbing.</button>
+        <button class="btn-suggestion rounded border border-indigo-500 p-4 font-semibold text-white hover:bg-indigo-600"
+          type="button" data-text="Fear is the true enemy. The only enemy.">Fear is the true enemy. The only
+          enemy.</button>
       </div>
     </div>
 
     <div class="mt-6">
       <p>This uses a Microsoft Azure Function to call an <a
           href="https://dotnet.microsoft.com/en-us/apps/machinelearning-ai/ml-dotnet">ML.NET</a> a binary classification
-        model which was trained on
-        scripts from the original trilogy Star Wars films and Star Trek TV episodes.</p>
+        model which was trained on scripts from the original trilogy Star Wars films and Star Trek TV episodes.</p>
       <p>You can view the source in the <a href="https://github.com/jamesuk189/StarTrekOrStarWars">GitHub
           repository.</a></p>
     </div>
@@ -99,7 +91,7 @@
       function showWorking() {
         hideStatusPanel();
         btnProcess.disabled = true;
-        btnProcess.textContent = 'Working...';
+        btnProcess.innerHTML = 'Working... <svg class="animate-spin h-5 w-5 text-white float-right" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>';
       }
 
       function hideWorking() {
